@@ -1,35 +1,40 @@
 'use strict';
 
-var tocmd       = require('./../index'),
-    fs          = require('fs'),
-    should      = require('should'),
-    util        = require('util'),
-    path        = require('path'),
-    exampleFile = __dirname + '/mockups/doc/myfiles/COMPLEX_HEADERS.md',
-    fileContent = fs.readFileSync(exampleFile, 'utf8');
-
-Object.prototype.dump = function () {
-    console.log(util.inspect(this, false, null));
-};
+var tocmd                   = require('./../index'),
+    fs                      = require('fs'),
+    should                  = require('should'),
+    path                    = require('path'),
+    COMPLEX_HEADERS         = '/mockups/doc/myfiles/COMPLEX_HEADERS.md',
+    COMPLEX_HEADERS_CONTENT = fs.readFileSync(__dirname + COMPLEX_HEADERS, 'utf8'),
+    HEADER_PARSE            = './mockups/mockup.header.parse',
+    HEADER_ORGANISE         = './mockups/mockup.header.organise',
+    HEADER_INNER            = './mockups/mockup.header.inner',
+    FILE_MAP                = './mockups/mockup.file.map',
+    FILE_PARSE              = './mockups/mockup.file.parse',
+    FILE_ORGANISE           = './mockups/mockup.file.organise',
+    FILE_CRAWL              = './mockups/mockup.file.crawl',
+    FORMAT_FULL             = './mockups/mockup.format.full',
+    FORMAT_ONE              = './mockups/mockup.format.one',
+    FORMAT_THREE            = './mockups/mockup.format.three',
+    FORMAT_CLI              = './mockups/mockup.format.cli',
+    MOCKUP_MD               = '/mockups/mockup.emde',
+    TAGS_MD                 = '/mockups/mockup.tags.emde',
+    COMPOSER_PARSE          = './mockups/mockup.composer.parse',
+    COMPOSER_BUILD_MD       = '/mockups/mockup.composer.build.emde';
 
 describe('Collector', function () {
 
-    it('Should extract headers', function () {
-
-        tocmd.collector.extractHeaders(fileContent).should.eql(require('./mockups/mockup.header.extract'));
-    });
-
     it('Should parse headers', function () {
-        tocmd.collector.parseHeaders(require('./mockups/mockup.header.extract')).should.eql(require('./mockups/mockup.header.parse'));
+        tocmd.collector.parseHeaders(COMPLEX_HEADERS_CONTENT).should.eql(require(HEADER_PARSE));
     });
 
     it('Should organise headers', function () {
-        tocmd.collector.organise(require('./mockups/mockup.header.parse')).should.eql(require('./mockups/mockup.header.organise'));
+        tocmd.collector.organise(require(HEADER_PARSE)).should.eql(require(HEADER_ORGANISE));
     });
 
     it('Should organise headers from file', function () {
-        tocmd.collector.innerHeaders(exampleFile).should.eql(require('./mockups/mockup.header.organise'));
-        tocmd.collector.parseFile('/mockups/doc/myfiles/COMPLEX_HEADERS.md', true, __dirname).should.eql(require('./mockups/mockup.header.inner'));
+        tocmd.collector.innerHeaders(__dirname + COMPLEX_HEADERS).should.eql(require(HEADER_ORGANISE));
+        tocmd.collector.parseFile(COMPLEX_HEADERS, true, __dirname).should.eql(require(HEADER_INNER));
     });
 
     it('Should be able to map all MD files or LICENSE file', function (done) {
@@ -39,25 +44,25 @@ describe('Collector', function () {
             list.forEach(function (file) {
                 fileList.push(path.relative(__dirname, file));
             });
-            fileList.should.eql(require('./mockups/mockup.file.map'));
+            fileList.should.eql(require(FILE_MAP));
             done();
         })
     });
 
     it('Should parse files', function () {
-        tocmd.collector.parseFiles(require('./mockups/mockup.file.map'), null, null, tocmd.collector.fileSortFunction).should.eql(require('./mockups/mockup.file.parse'));
+        tocmd.collector.parseFiles(require(FILE_MAP), null, null, tocmd.collector.fileSortFunction).should.eql(require(FILE_PARSE));
     });
 
     it('Should organise files', function () {
 
-        tocmd.collector.organise(require('./mockups/mockup.file.parse')).should.eql(require('./mockups/mockup.file.organise'));
+        tocmd.collector.organise(require(FILE_PARSE)).should.eql(require(FILE_ORGANISE));
     });
 
     it('Should do all in one command', function (done) {
         tocmd.collector.crawl(__dirname, function (error, tree) {
             should.not.exist(error);
             should.exist(tree);
-            tree.should.eql(require('./mockups/mockup.file.organise'));
+            tree.should.eql(require(FILE_ORGANISE));
             done();
         }, tocmd.collector.fileSortFunction);
     });
@@ -66,27 +71,26 @@ describe('Collector', function () {
         tocmd.collector.crawl(__dirname, true, function (error, tree) {
             should.not.exist(error);
             should.exist(tree);
-            tree.should.eql(require('./mockups/mockup.file.crawl'));
+            tree.should.eql(require(FILE_CRAWL));
             done();
         }, tocmd.collector.fileSortFunction);
     });
-
 });
 
 describe('Formatter', function () {
 
     it('Should create full file tree', function () {
-        tocmd.formatter.linkize(require('./mockups/mockup.file.crawl')).should.eql(require('./mockups/mockup.format.full'));
+        tocmd.formatter.linkize(require(FILE_CRAWL)).should.eql(require(FORMAT_FULL));
     });
 
     it('Should create deptch limited tree', function () {
-        tocmd.formatter.linkize(require('./mockups/mockup.file.crawl'), {
+        tocmd.formatter.linkize(require(FILE_CRAWL), {
             maxDepth: 1
-        }).should.eql(require('./mockups/mockup.format.one'));
+        }).should.eql(require(FORMAT_ONE));
 
-        tocmd.formatter.linkize(require('./mockups/mockup.file.crawl'), {
+        tocmd.formatter.linkize(require(FILE_CRAWL), {
             maxDepth: 3
-        }).should.eql(require('./mockups/mockup.format.three'));
+        }).should.eql(require(FORMAT_THREE));
     });
 
     it('Should create nice CLI output', function () {
@@ -97,15 +101,15 @@ describe('Formatter', function () {
                 lines.push(line);
             }
         };
-        var tree = tocmd.formatter.linkize(require('./mockups/mockup.file.crawl'));
+        var tree = tocmd.formatter.linkize(require(FILE_CRAWL));
         tocmd.formatter.formatCLI(tree, null, logger);
-        lines.should.eql(require('./mockups/mockup.format.cli'));
+        lines.should.eql(require(FORMAT_CLI));
     });
 
     it('Should create awesome MD output', function () {
 
-        var tree = tocmd.formatter.linkize(require('./mockups/mockup.file.crawl'));
-        tocmd.formatter.formatMD(tree).should.eql(fs.readFileSync(__dirname + '/mockups/mockup.emde', 'utf8'));
+        var tree = tocmd.formatter.linkize(require(FILE_CRAWL));
+        tocmd.formatter.formatMD(tree).should.eql(fs.readFileSync(__dirname + MOCKUP_MD, 'utf8'));
     });
 
 });
@@ -113,14 +117,14 @@ describe('Formatter', function () {
 describe('Composer', function () {
 
     it('Understands tag', function () {
-        tocmd.composer.parse(fs.readFileSync(__dirname + '/mockups/mockup.tags.emde', 'utf8')).should.eql(require('./mockups/mockup.composer.parse'));
+        tocmd.composer.parse(fs.readFileSync(__dirname + TAGS_MD, 'utf8')).should.eql(require(COMPOSER_PARSE));
     });
 
     it('Inserts toc', function (done) {
-        var path = __dirname + '/mockups/mockup.tags.emde';
+        var path = __dirname + TAGS_MD;
         tocmd.composer.build(fs.readFileSync(path, 'utf8'), path, __dirname + '/mockups', function (error, content) {
             should.not.exist(error);
-            content.should.eql(fs.readFileSync(__dirname + '/mockups/mockup.composer.build.emde', 'utf8'));
+            content.should.eql(fs.readFileSync(__dirname + COMPOSER_BUILD_MD, 'utf8'));
             done();
         });
     });

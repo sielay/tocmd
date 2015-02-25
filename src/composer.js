@@ -8,7 +8,7 @@ var collector = require('./collector'),
     PHP_EOL   = require('os').EOL;
 
 function parse(content) {
-    var reg = /\<\!--\s*TOCSTART(|\(.*?\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/g,
+    var reg = /\^<\!--\s*TOCSTART(|\(.*?\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/g,
         regOne = /\<\!--\s*TOCSTART(|\((.*?)\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/,
         matches = content.match(reg),
         results = [];
@@ -49,7 +49,7 @@ function build(content, file, root, callback) {
 
 
         if(tag.params.justHeaders) {
-            replacement = formatter.linkize(collector.organise(collector.parseHeaders(collector.extractHeaders(content))), null, null, file);
+            replacement = formatter.linkize(collector.organise(collector.parseHeaders(content)), null, null, file);
             return next();
         }
 

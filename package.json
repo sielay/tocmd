@@ -1,7 +1,7 @@
 {
-  "name": "toc-md",
+  "name": "toc-md-files",
   "version": "1.0.0",
-  "description": "List of contents for your MD documentation",
+  "description": "List of contents for your MD documentation - including file tree",
   "main": "index.js",
   "scripts": {
     "test": "gulp test"
@@ -36,6 +36,7 @@
     "command-line-args": "^0.5.5",
     "each-async": "^1.1.1",
     "glob": "^4.4.0",
-    "lodash": "^3.3.1"
+    "lodash": "^3.3.1",
+    "marked": "^0.3.3"
   }
 }

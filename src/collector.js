@@ -2,7 +2,10 @@
 
 var fs   = require('fs'),
     glob = require('glob'),
-    path = require('path');
+    path = require('path'),
+    marked = require('marked'),
+    lexer = marked.lexer,
+    parser = marked.parser;
 
 function crawl(dir) {
     var callback,
@@ -30,28 +33,11 @@ function crawl(dir) {
 }
 
 function innerHeaders(file) {
-    return organise(parseHeaders(extractHeaders(fs.readFileSync(file, 'utf8'))))
+    return organise(parseHeaders(fs.readFileSync(file, 'utf8')));
 }
 
 function mapFiles(dir, callback) {
     glob(dir + '/**/+(*.+(MD|md)|LICENSE|README|readme|license)', callback);
-}
-
-function fetch(files) {
-    files.forEach(function (file) {
-        var content = fs.readFileSync(file, 'utf8');
-        extractHeaders(content);
-    });
-}
-
-function extractHeaders(content) {
-    var headers = [];
-    content.split(/\n|\n\r|\r/g).forEach(function (line) {
-        if (line.match(/^\s*(#+)/)) {
-            headers.push(line);
-        }
-    });
-    return headers;
 }
 
 function parseHeader(line) {
@@ -63,10 +49,17 @@ function parseHeader(line) {
     };
 }
 
-function parseHeaders(lines) {
+function parseHeaders(content) {
+
     var headers = [];
-    lines.forEach(function (line) {
-        headers.push(parseHeader(line));
+    lexer(content).forEach(function(token) {
+        if(token.type === 'heading' ) {
+            headers.push({
+                level: token.depth,
+                label: token.text,
+                items: []
+            })
+        }
     });
     return headers;
 }
@@ -130,13 +123,11 @@ function parseFiles(filesList, withContent, root, sort) {
 module.exports = {
     crawl           : crawl,
     innerHeaders    : innerHeaders,
-    extractHeaders  : extractHeaders,
     parseHeader     : parseHeader,
     parseHeaders    : parseHeaders,
     organise        : organise,
     mapFiles        : mapFiles,
     parseFile       : parseFile,
     parseFiles      : parseFiles,
-    fetch           : fetch,
     fileSortFunction: fileSortFunction
 };

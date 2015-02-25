@@ -19,4 +19,6 @@
 
 <!-- TOCEND -->
 
+    <!-- TOCSTART(-1,false,false) -->
+    <!-- TOCEND -->
 Table of Contents for your MD documentation

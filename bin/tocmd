@@ -8,7 +8,8 @@ var cli = cliArgs([
     { name: 'verbose', type: Boolean, alias: 'v', description: 'Write plenty output' },
     { name: 'help', type: Boolean, alias: 'h', description: 'Print usage instructions' },
     { name: 'files', type: Array, defaultOption: true, description: 'The input files' },
-    { name: 'source', alias: 's', description: 'Source directory' }
+    { name: 'source', alias: 's', description: 'Source directory' },
+    { name: 'test', alias: 't', description:  'Test specific file', type: String}
 ]);
 
 /* parse the supplied command-line values */
@@ -31,6 +32,12 @@ if(!options.source) {
     options.source = '.';
 }
 
+if(options.test) {
+    var content = require('fs').readFileSync(options.test,'utf8');
+    var result = require('marked').lexer(content);
+    console.log(result);
+    process.exit(0);
+}
 tocmd.composer.buildDoc(options.source, function(error) {
     if(error) {
         return console.log(chalk.red(error));

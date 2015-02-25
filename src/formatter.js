@@ -88,7 +88,7 @@ function formatMD(links, indent) {
         for (var i = 0; i < indent; i++) ind += '  ';
         str += (ind + '* [' + link.title + '](' + link.path + ')' + PHP_EOL);
         str += formatMD(link.items, indent + 1);
-    })
+    });
     return str;
 }
 
