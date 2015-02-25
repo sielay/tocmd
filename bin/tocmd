@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+var cliArgs = require('command-line-args'),
+    chalk = require('chalk'),
+    tocmd = require('./../index');
+
+/* define the command-line options */
+var cli = cliArgs([
+    { name: 'verbose', type: Boolean, alias: 'v', description: 'Write plenty output' },
+    { name: 'help', type: Boolean, alias: 'h', description: 'Print usage instructions' },
+    { name: 'files', type: Array, defaultOption: true, description: 'The input files' },
+    { name: 'source', alias: 's', description: 'Source directory' }
+]);
+
+/* parse the supplied command-line values */
+try {
+    var options = cli.parse();
+} catch(e) {
+    console.error(chalk.red(e));
+    return;
+}
+
+if(options.help) {
+    console.log(chalk.cyan(cli.getUsage({
+        header: 'Documentation processor',
+        footer: 'For more information, visit https://github.com/sielay/tocmd'
+    })));
+    return;
+}
+
+if(!options.source) {
+    options.source = '.';
+}
+
+tocmd.composer.buildDoc(options.source, function(error) {
+    if(error) {
+        return console.log(chalk.red(error));
+    }
+    console.log(chalk.green('Documenation built'));
+});
+
+
+
+
