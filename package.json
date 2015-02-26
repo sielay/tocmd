@@ -1,6 +1,6 @@
 {
   "name": "toc-md-files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "List of contents for your MD documentation - including file tree",
   "main": "index.js",
   "scripts": {

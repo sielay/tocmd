@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 var cliArgs = require('command-line-args'),
-    chalk = require('chalk'),
-    tocmd = require('./../index');
+    chalk   = require('chalk'),
+    tocmd   = require('./../index');
 
 /* define the command-line options */
 var cli = cliArgs([
-    { name: 'verbose', type: Boolean, alias: 'v', description: 'Write plenty output' },
-    { name: 'help', type: Boolean, alias: 'h', description: 'Print usage instructions' },
-    { name: 'files', type: Array, defaultOption: true, description: 'The input files' },
-    { name: 'source', alias: 's', description: 'Source directory' },
-    { name: 'test', alias: 't', description:  'Test specific file', type: String}
+    {name: 'verbose', type: Boolean, alias: 'v', description: 'Write plenty output'},
+    {name: 'help', type: Boolean, alias: 'h', description: 'Print usage instructions'},
+    {name: 'files', type: Array, defaultOption: true, description: 'The input files'},
+    {name: 'source', alias: 's', description: 'Source directory'},
+    {name: 'exclude', alias: 'e', description: 'Exclude, by default node_modules'}
 ]);
 
 /* parse the supplied command-line values */
 try {
     var options = cli.parse();
-} catch(e) {
+} catch (e) {
     console.error(chalk.red(e));
     return;
 }
 
-if(options.help) {
+if (options.help) {
     console.log(chalk.cyan(cli.getUsage({
         header: 'Documentation processor',
         footer: 'For more information, visit https://github.com/sielay/tocmd'
@@ -28,22 +28,24 @@ if(options.help) {
     return;
 }
 
-if(!options.source) {
+if (!options.source) {
     options.source = '.';
 }
 
-if(options.test) {
-    var content = require('fs').readFileSync(options.test,'utf8');
-    var result = require('marked').lexer(content);
-    console.log(result);
-    process.exit(0);
+if (options.verbose) {
+    process.verbose = true;
 }
-tocmd.composer.buildDoc(options.source, function(error) {
-    if(error) {
+
+if (!options.exclude) {
+    options.exclude = ['./node_modules'];
+}
+
+tocmd.composer.buildDoc(options.source, function (error) {
+    if (error) {
         return console.log(chalk.red(error));
     }
     console.log(chalk.green('Documenation built'));
-});
+}, options.exclude);
 
 
 

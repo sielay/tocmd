@@ -4,23 +4,41 @@ var fs   = require('fs'),
     glob = require('glob'),
     path = require('path'),
     marked = require('marked'),
-    lexer = marked.lexer,
-    parser = marked.parser;
+    lexer = marked.lexer;
 
 function crawl(dir) {
     var callback,
         withContent = false,
-        sortFunction = null;
+        sortFunction = null,
+        exclude = null;
     if (typeof(arguments[1]) === 'function') {
         callback = arguments[1];
         sortFunction = arguments[2];
+        exclude = arguments[3];
     } else {
         withContent = arguments[1];
         callback = arguments[2];
         sortFunction = arguments[3];
+        exclude = arguments[4];
     }
-
     mapFiles(dir, function (error, list) {
+
+        if(exclude) {
+            var clean = [];
+            list.forEach(function(item) {
+                var pass = true;
+                exclude.forEach(function(ex) {
+                    if(item.indexOf(ex) === 0) {
+                        pass = false;
+                    }
+                });
+                if(pass) {
+                    clean.push(item);
+                }
+            });
+            list = clean;
+        }
+
         if (error) {
             callback(error);
         }

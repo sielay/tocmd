@@ -5,7 +5,8 @@ var collector = require('./collector'),
     eachAsync = require('each-async'),
     fs        = require('fs'),
     path      = require('path'),
-    PHP_EOL   = require('os').EOL;
+    PHP_EOL   = require('os').EOL,
+    chalk     = require('chalk');
 
 function parse(content) {
     var reg = /\^<\!--\s*TOCSTART(|\(.*?\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/g,
@@ -23,7 +24,7 @@ function parse(content) {
             params: {
                 maxDepth      : maxDepth,
                 includeHeaders: includeHeaders,
-                justHeaders : justHeaders
+                justHeaders   : justHeaders
             },
             tag   : match
         });
@@ -37,7 +38,7 @@ function build(content, file, root, callback) {
 
         var replacement = null;
 
-        var next = function() {
+        var next = function () {
             content = content.replace(tag.tag, '<!-- TOCSTART(' +
             tag.params.maxDepth + ',' +
             (tag.params.includeHeaders ? 'true' : 'false') + ',' +
@@ -47,8 +48,7 @@ function build(content, file, root, callback) {
         };
 
 
-
-        if(tag.params.justHeaders) {
+        if (tag.params.justHeaders) {
             replacement = formatter.linkize(collector.organise(collector.parseHeaders(content)), null, null, file);
             return next();
         }
@@ -84,6 +84,9 @@ function buildFile(file, callback) {
 }
 
 function buildDocCrawl(root, item, callback) {
+    if (process.verbose === true) {
+        console.log(chalk.blue('buildDocCrawl ') + ': ' + chalk.yellow(item.path));
+    }
     if (!item || !item.items) {
         return callback();
     }
@@ -99,13 +102,16 @@ function buildDocCrawl(root, item, callback) {
     });
 }
 
-function buildDoc(root, done) {
+function buildDoc(root, done, exclude) {
+    if (process.verbose === true) {
+        console.log(chalk.blue('buildDoc ') + ': ' + chalk.yellow(root));
+    }
     collector.crawl(root, function (error, files) {
         if (error) {
             return done(error);
         }
         buildDocCrawl(root, files, done);
-    });
+    }, null, exclude);
 }
 
 module.exports = {

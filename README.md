@@ -7,6 +7,14 @@ Why?
 ----
 
 [Markdown](http://daringfireball.net/projects/markdown/) is already standard in the industry. There are number of various tools (mostly commercial) to give extra powers to MD. This simple liblary is meant to allow you add maintainless, hasslefree tables of contents and other indexing widgets to your project. Idea is that you can connect this lib to your build or versioning process to keep documentation navigation always up to date.
+
+There are similar projects (listed below), but so far none of them address file tree:
+ * https://www.npmjs.com/package/marked-toc
+ * https://www.npmjs.com/package/md2toc
+ * https://www.npmjs.com/package/markdown-toc
+ * https://www.npmjs.com/package/md-toc
+ 
+If you find features that would make this package better, or you know better open package, please let me know.
  
 
 ## Table of contents
