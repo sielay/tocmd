@@ -79,6 +79,10 @@ describe('Collector', function () {
 
 describe('Formatter', function () {
 
+    it('Should proprely hash header', function() {
+        tocmd.formatter.hashHeader('Header 3 1.1.1').should.eql('user-content-header-3-111');
+    });
+
     it('Should create full file tree', function () {
         tocmd.formatter.linkize(require(FILE_CRAWL)).should.eql(require(FORMAT_FULL));
     });
@@ -111,6 +115,8 @@ describe('Formatter', function () {
         var tree = tocmd.formatter.linkize(require(FILE_CRAWL));
         tocmd.formatter.formatMD(tree).should.eql(fs.readFileSync(__dirname + MOCKUP_MD, 'utf8'));
     });
+
+
 
 });
 

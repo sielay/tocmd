@@ -35,9 +35,13 @@ function makeLinkFromFile(file, options, depth) {
     };
 }
 
+function hashHeader(header) {
+    return 'user-content-' + header.toLowerCase().replace(/[^a-z0-9\s\t]+/g, '').replace(/[\s\t ]+/g,'-');
+}
+
 function makeLinkFromHeader(header, options, depth, inFile) {
     return {
-        path : inFile + '#user-content-' + header.label.toLowerCase().replace(/[\s\t ]+/g,'-').replace(/[^a-z0-9]+/g, ''),
+        path : inFile + '#' + hashHeader(header.label),
         title: header.label,
         items: linkize(header, options, depth, inFile),
         depth: depth
@@ -95,5 +99,6 @@ function formatMD(links, indent) {
 module.exports = {
     linkize  : linkize,
     formatCLI: formatCLI,
-    formatMD : formatMD
+    formatMD : formatMD,
+    hashHeader: hashHeader
 };
