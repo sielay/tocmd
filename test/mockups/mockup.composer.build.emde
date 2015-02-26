@@ -1,6 +1,6 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam sem, facilisis vel lacinia ut, aliquam at massa. Nulla placerat enim et diam eleifend, vitae tristique augue accumsan. In consequat ligula vel mi consequat, eget mollis erat malesuada. Proin varius enim ac commodo pharetra. Cras dictum felis porta nunc aliquam, in aliquet ex laoreet. Integer odio neque, rhoncus pretium dignissim id, ornare vel metus. In fermentum nisl id pellentesque porta. Duis ac volutpat risus, imperdiet pretium nulla. Donec at euismod velit. Donec ac sem eu metus auctor ornare viverra vitae ipsum. Curabitur ullamcorper libero vel dolor volutpat consequat. Phasellus fermentum risus ut arcu gravida placerat. Aenean interdum dui vitae blandit dictum. Maecenas efficitur, turpis nec lobortis eleifend, tortor lectus ultricies est, id vehicula mi velit vitae sapien. Etiam dictum mi dui, in finibus erat ornare non. Fusce ac justo ut urna maximus placerat.
 
-<!-- TOCSTART(-1,false,false) -->
+<!-- TOCSTART -->
 * [LICENSE](LICENSE)
 * [README.MD](README.MD)
   * [COMPLEX_HEADERS.](doc/myfiles/COMPLEX_HEADERS.md)
@@ -17,7 +17,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam sem, facilisis 
 
 Vestibulum pellentesque mi vitae magna hendrerit convallis. Nulla lorem leo, tristique vulputate lectus id, porttitor ornare ligula. Ut maximus risus nibh, at faucibus nibh tempor hendrerit. Vestibulum pulvinar quis diam eu iaculis. Sed vitae finibus massa. Suspendisse potenti. Vivamus in neque est. Phasellus tempor ultrices efficitur. Curabitur fringilla felis ac metus aliquet vulputate. Sed posuere lacinia ligula, in aliquam nisl lacinia eget. Cras tortor leo, sollicitudin eget pellentesque nec, dapibus non mauris. Sed placerat dui leo, eu dignissim arcu vestibulum vitae. Nam non tortor elementum, interdum erat ut, dapibus sapien. Sed sed neque pharetra, commodo est eget, mollis urna. In hac habitasse platea dictumst.
 
-<!-- TOCSTART(3,false,false) -->
+<!-- TOCSTART(3) -->
 * [LICENSE](LICENSE)
 * [README.MD](README.MD)
   * [COMPLEX_HEADERS.](doc/myfiles/COMPLEX_HEADERS.md)
@@ -33,7 +33,7 @@ Vestibulum pellentesque mi vitae magna hendrerit convallis. Nulla lorem leo, tri
 
 Nulla congue metus mauris, ut finibus mi consectetur at. In quis malesuada arcu. Nulla bibendum viverra vulputate. Cras ut lorem enim. Phasellus porttitor, eros vitae eleifend blandit, massa nisi luctus risus, eget egestas purus tortor vitae arcu. Duis feugiat pulvinar tortor, at cursus sapien ultrices nec. Nulla et mi nulla. Nunc eu pulvinar velit. Ut egestas enim ornare tincidunt ornare.
 
-<!-- TOCSTART(-1,true,false) -->
+<!-- TOCSTART(true,true) -->
 * [LICENSE](LICENSE)
 * [tocmd](README.MD)
   * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
@@ -63,7 +63,7 @@ Vestibulum vestibulum, nulla vitae molestie aliquam, lorem est congue magna, et 
 ## head 3
 
 
-<!-- TOCSTART(134,true,false) -->
+<!-- TOCSTART(134,true) -->
 * [LICENSE](LICENSE)
 * [tocmd](README.MD)
   * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
@@ -86,5 +86,43 @@ Vestibulum vestibulum, nulla vitae molestie aliquam, lorem est congue magna, et 
 * [head](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head)
   * [head 2](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head-2)
   * [head 3](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head-3)
+
+<!-- TOCEND -->
+
+<!-- TOCSTART(-1,content) -->
+* [LICENSE](LICENSE)
+* [tocmd](README.MD)
+  * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
+    * [Header 2 1.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-2-11)
+      * [Header 3 1.1.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-3-111)
+    * [Header 2 1.2](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-2-12)
+      * [Header 4 1.2.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-4-121)
+  * [INDEX.MD](doc/myfiles/INDEX.MD)
+  * [OTHER.MD](doc/myfiles/OTHER.MD)
+  * [README](doc/myfiles/README)
+  * [Some](doc/myfiles/SOME.MD)
+    * [ANY.MD](doc/myfiles/other/ANY.MD)
+    * [INNER.MD](doc/myfiles/other/INNER.MD)
+      * [INDEX.MD](doc/myfiles/other/inner/INDEX.MD)
+    * [readme](doc/myfiles/other/readme)
+
+<!-- TOCEND -->
+
+<!-- TOCSTART(-1,content, no-files) -->
+* [LICENSE](LICENSE)
+* [tocmd](README.MD)
+  * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
+    * [Header 2 1.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-2-11)
+      * [Header 3 1.1.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-3-111)
+    * [Header 2 1.2](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-2-12)
+      * [Header 4 1.2.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-4-121)
+  * [INDEX.MD](doc/myfiles/INDEX.MD)
+  * [OTHER.MD](doc/myfiles/OTHER.MD)
+  * [README](doc/myfiles/README)
+  * [Some](doc/myfiles/SOME.MD)
+    * [ANY.MD](doc/myfiles/other/ANY.MD)
+    * [INNER.MD](doc/myfiles/other/INNER.MD)
+      * [INDEX.MD](doc/myfiles/other/inner/INDEX.MD)
+    * [readme](doc/myfiles/other/readme)
 
 <!-- TOCEND -->

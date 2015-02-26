@@ -23,13 +23,14 @@ function parse(content) {
         var parts = match.match(regOne);
         var params = parts[2] ? parts[2].split(',') : '';
         var maxDepth = ( params[0] === 'true' || !params[0] ) ? -1 : parseInt(params[0]);
-        var includeHeaders = params[1] === 'true' ? true : false;
-        var justHeaders = params[2] === 'true' ? true : false;
+        var includeHeaders = params.indexOf('content') > -1 || params[1] === 'true' ? true : false;
+        var justHeaders = params.indexOf('no-files') > -1 || params[2] === 'true' ? true : false;
         results.push({
             params: {
                 maxDepth      : maxDepth,
                 includeHeaders: includeHeaders,
-                justHeaders   : justHeaders
+                justHeaders   : justHeaders,
+                original : parts[2] || false
             },
             tag   : match
         });
@@ -45,11 +46,12 @@ function build(content, file, root, callback) {
         var replacement = null;
 
         var next = function () {
-            content = content.replace(tag.tag, '<!-- TOCSTART(' +
-            tag.params.maxDepth + ',' +
-            (tag.params.includeHeaders ? 'true' : 'false') + ',' +
-            (tag.params.justHeaders ? 'true' : 'false') +
-            ') -->' + PHP_EOL + formatter.formatMD(replacement) + PHP_EOL + '<!-- TOCEND -->');
+            var repl = '<!-- TOCSTART';
+            if(tag.params.original) {
+                repl += '(' + tag.params.original + ')';
+            }
+            repl += ' -->' + PHP_EOL + formatter.formatMD(replacement) + PHP_EOL + '<!-- TOCEND -->'
+            content = content.replace(tag.tag, repl);
             done();
         };
 

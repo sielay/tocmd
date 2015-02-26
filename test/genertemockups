@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  *
  * This is kind of reverse of tests. It will create all mockups basing on basic files.

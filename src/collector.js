@@ -1,38 +1,37 @@
 'use strict';
 
-var fs   = require('fs'),
-    glob = require('glob'),
-    path = require('path'),
-    marked = require('marked'),
-    lexer = marked.lexer;
+var fs         = require('fs'),
+    glob       = require('glob'),
+    path       = require('path'),
+    marked     = require('marked'),
+    lexer      = marked.lexer,
+    repository = {},
+    i = 0;
 
 function crawl(dir) {
     var callback,
         withContent = false,
-        sortFunction = null,
-        exclude = null;
+        sortFunction = null;
     if (typeof(arguments[1]) === 'function') {
         callback = arguments[1];
         sortFunction = arguments[2];
-        exclude = arguments[3];
     } else {
         withContent = arguments[1];
         callback = arguments[2];
         sortFunction = arguments[3];
-        exclude = arguments[4];
     }
     mapFiles(dir, function (error, list) {
 
-        if(process.exclude) {
+        if (process.exclude) {
             var clean = [];
-            list.forEach(function(item) {
+            list.forEach(function (item) {
                 var pass = true;
-                process.exclude.forEach(function(ex) {
-                    if(item.indexOf(ex) === 0) {
+                process.exclude.forEach(function (ex) {
+                    if (item.indexOf(ex) === 0) {
                         pass = false;
                     }
                 });
-                if(pass) {
+                if (pass) {
                     clean.push(item);
                 }
             });
@@ -50,8 +49,16 @@ function crawl(dir) {
     });
 }
 
+function fileRead(path) {
+    i++;
+    return fs.readFileSync(path, 'utf8')
+}
+
 function innerHeaders(file) {
-    return organise(parseHeaders(fs.readFileSync(file, 'utf8')));
+    var abs = path.resolve(file),
+        cache = repository[abs];
+    if (cache) return cache;
+    return (repository[abs] = organise(parseHeaders(fileRead(file))));
 }
 
 function mapFiles(dir, callback) {
@@ -70,8 +77,8 @@ function parseHeader(line) {
 function parseHeaders(content) {
 
     var headers = [];
-    lexer(content).forEach(function(token) {
-        if(token.type === 'heading' ) {
+    lexer(content).forEach(function (token) {
+        if (token.type === 'heading') {
             headers.push({
                 level: token.depth,
                 label: token.text,
@@ -103,6 +110,7 @@ function organise(list) {
 }
 
 function parseFile(file, withContent, root) {
+
     var obj = {
         path : file,
         level: file.split('/').length,
@@ -147,5 +155,8 @@ module.exports = {
     mapFiles        : mapFiles,
     parseFile       : parseFile,
     parseFiles      : parseFiles,
-    fileSortFunction: fileSortFunction
+    fileSortFunction: fileSortFunction,
+    report : function() {
+        return i;
+    }
 };

@@ -5,16 +5,16 @@ to-cmd
 
 ## Table of contents
 
-<!-- TOCSTART(-1,true,true) -->
-* [to-cmd](.//README.md#user-content-tocmd)
-  * [Table of contents](.//README.md#user-content-tableofcontents)
-  * [Why?](.//README.md#user-content-why)
-  * [Features](.//README.md#user-content-features)
-  * [Installation](.//README.md#user-content-installation)
-  * [Usage](.//README.md#user-content-usage)
-  * [Markup](.//README.md#user-content-markup)
-  * [TODO](.//README.md#user-content-todo)
-  * [Credits](.//README.md#user-content-credits)
+<!-- TOCSTART(-1,content,no-files) -->
+* [to-cmd](./README.md#user-content-tocmd)
+  * [Table of contents](./README.md#user-content-table-of-contents)
+  * [Why?](./README.md#user-content-why)
+  * [Features](./README.md#user-content-features)
+  * [Installation](./README.md#user-content-installation)
+  * [Usage](./README.md#user-content-usage)
+  * [Markup](./README.md#user-content-markup)
+  * [TODO](./README.md#user-content-todo)
+  * [Credits](./README.md#user-content-credits)
 
 <!-- TOCEND -->
 

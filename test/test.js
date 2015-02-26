@@ -161,4 +161,12 @@ describe('Composer', function () {
         tocmd.composer.buildDoc(__dirname, done);
     });
 
+    it('reports', function(done) {
+        tocmd.collector.mapFiles(__dirname, function (error, list) {
+            tocmd.collector.report().should.eql(list.length);
+            done();
+        });
+    });
+
 });
+
