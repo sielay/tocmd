@@ -9,11 +9,16 @@ var collector = require('./collector'),
     chalk     = require('chalk');
 
 function parse(content) {
-    var reg = /\^<\!--\s*TOCSTART(|\(.*?\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/g,
-        regOne = /\<\!--\s*TOCSTART(|\((.*?)\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/,
+    if (process.verbose === true) console.log(chalk.blue('composer.parse '));
+
+    var reg = /^\<\!--\s*TOCSTART(|\(.*?\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/gm,
+        regOne = /^\<\!--\s*TOCSTART(|\((.*?)\))\s*--\>([\s\S]*?)\<\!--\s*TOCEND\s*-->/,
         matches = content.match(reg),
         results = [];
+
     if (!matches) return results;
+
+
     matches.forEach(function (match) {
         var parts = match.match(regOne);
         var params = parts[2] ? parts[2].split(',') : '';
@@ -33,6 +38,7 @@ function parse(content) {
 }
 
 function build(content, file, root, callback) {
+    if (process.verbose === true) console.log(chalk.blue('composer.build ') + ': ' + chalk.yellow(file));
 
     eachAsync(parse(content), function (tag, index, done) {
 
@@ -69,6 +75,8 @@ function build(content, file, root, callback) {
 }
 
 function buildFile(file, callback) {
+    if (process.verbose === true) console.log(chalk.blue('composer.buildFile ') + ': ' + chalk.yellow(file));
+
     fs.readFile(file, 'utf8', function (error, content) {
         if (error) {
             return callback(error);
@@ -84,9 +92,8 @@ function buildFile(file, callback) {
 }
 
 function buildDocCrawl(root, item, callback) {
-    if (process.verbose === true) {
-        console.log(chalk.blue('buildDocCrawl ') + ': ' + chalk.yellow(item.path));
-    }
+    if (process.verbose === true) console.log(chalk.blue('composer.buildDocCrawl ') + ': ' + chalk.yellow(item.path));
+
     if (!item || !item.items) {
         return callback();
     }
@@ -103,9 +110,8 @@ function buildDocCrawl(root, item, callback) {
 }
 
 function buildDoc(root, done, exclude) {
-    if (process.verbose === true) {
-        console.log(chalk.blue('buildDoc ') + ': ' + chalk.yellow(root));
-    }
+    if (process.verbose === true) console.log(chalk.blue('composer.buildDoc ') + ': ' + chalk.yellow(root));
+
     collector.crawl(root, function (error, files) {
         if (error) {
             return done(error);

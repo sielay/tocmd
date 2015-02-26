@@ -20,5 +20,17 @@
 <!-- TOCEND -->
 
     <!-- TOCSTART(-1,false,false) -->
-    <!-- TOCEND -->
+* [LICENSE](LICENSE)
+* [README.MD](README.MD)
+  * [COMPLEX_HEADERS.](doc/myfiles/COMPLEX_HEADERS.md)
+  * [INDEX.MD](doc/myfiles/INDEX.MD)
+  * [OTHER.MD](doc/myfiles/OTHER.MD)
+  * [README](doc/myfiles/README)
+  * [SOME.MD](doc/myfiles/SOME.MD)
+    * [ANY.MD](doc/myfiles/other/ANY.MD)
+    * [INNER.MD](doc/myfiles/other/INNER.MD)
+      * [INDEX.MD](doc/myfiles/other/inner/INDEX.MD)
+    * [readme](doc/myfiles/other/readme)
+
+<!-- TOCEND -->
 Table of Contents for your MD documentation

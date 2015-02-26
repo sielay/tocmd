@@ -23,11 +23,11 @@ function crawl(dir) {
     }
     mapFiles(dir, function (error, list) {
 
-        if(exclude) {
+        if(process.exclude) {
             var clean = [];
             list.forEach(function(item) {
                 var pass = true;
-                exclude.forEach(function(ex) {
+                process.exclude.forEach(function(ex) {
                     if(item.indexOf(ex) === 0) {
                         pass = false;
                     }

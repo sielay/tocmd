@@ -3,6 +3,22 @@ to-cmd
 
 > Table of Contents for your MD documentation. 
 
+## Table of contents
+
+<!-- TOCSTART(-1,true,true) -->
+* [to-cmd](.//README.md#user-content-tocmd)
+  * [Table of contents](.//README.md#user-content-tableofcontents)
+  * [Why?](.//README.md#user-content-why)
+  * [Features](.//README.md#user-content-features)
+  * [Installation](.//README.md#user-content-installation)
+  * [Usage](.//README.md#user-content-usage)
+  * [Markup](.//README.md#user-content-markup)
+  * [TODO](.//README.md#user-content-todo)
+  * [Credits](.//README.md#user-content-credits)
+
+<!-- TOCEND -->
+
+
 Why?
 ----
 
@@ -15,23 +31,18 @@ There are similar projects (listed below), but so far none of them address file 
  * https://www.npmjs.com/package/md-toc
  
 If you find features that would make this package better, or you know better open package, please let me know.
- 
 
-## Table of contents
-<!-- TOCSTART(-1,true,true) -->
-* [tocmd](./README.md#user-content-tocmd)
-  * [Table of contents](./README.md#user-content-tableofcontents)
-  * [Installation](./README.md#user-content-installation)
-  * [Usage](./README.md#user-content-usage)
-  * [Markup](./README.md#user-content-markup)
-  * [TODO](./README.md#user-content-todo)
+## Features
+ * List headers in file
+ * List files in project
+ * Ignore paths (`node_modules` by default)
+ * Ignore tags in `tab` code blocks
 
-<!-- TOCEND -->
 
 ## Installation
 
 ```
-npm install toc-md -g
+npm install toc-md-files -g
 ```
 
 ## Usage
@@ -43,19 +54,19 @@ npm install toc-md -g
 ## Markup
 
 
-
 By default comment bloci load 
 
-<!-- NOTOC -->
 	<!-- TOCSTART(-1,false,false) -->
-	<!-- TOCEND -->
+    <!-- TOCEND -->
 	<!-- TOCSTART(1,false,false) -->
-	<!-- TOCEND --
-	<!-- TOCSTART(1,true,false) -->
 	<!-- TOCEND -->
 	<!-- TOCSTART(1,true,true) -->
-	<!-- TOCEND -->
-<!-- NOTOC -->
+    <!-- TOCEND -->
+
+Params:
+ * max depth, if -1 - unlimited 
+ * show in file headers
+ * show file tree
 
 ## TODO
 

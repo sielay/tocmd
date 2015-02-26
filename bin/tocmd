@@ -39,6 +39,7 @@ if (options.verbose) {
 if (!options.exclude) {
     options.exclude = ['./node_modules'];
 }
+process.exclude = options.exclude;
 
 tocmd.composer.buildDoc(options.source, function (error) {
     if (error) {
