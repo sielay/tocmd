@@ -22,9 +22,15 @@ function parse(content) {
     matches.forEach(function (match) {
         var parts = match.match(regOne);
         var params = parts[2] ? parts[2].split(',') : '';
-        var maxDepth = ( params[0] === 'true' || !params[0] ) ? -1 : parseInt(params[0]);
-        var includeHeaders = params.indexOf('content') > -1 || params[1] === 'true' ? true : false;
-        var justHeaders = params.indexOf('no-files') > -1 || params[2] === 'true' ? true : false;
+
+        if(params.indexOf('true') > -1 || params.indexOf('false') > -1 ) {
+            throw new Error('Boolean params are not longer supported');
+        }
+
+        var maxDepth = (!params[0] || isNaN(+params[0])) ? -1 : +params[0];
+        var includeHeaders = params.indexOf('content') > -1;
+        var justHeaders = params.indexOf('no-files') > -1;
+
         results.push({
             params: {
                 maxDepth      : maxDepth,

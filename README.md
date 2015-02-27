@@ -54,19 +54,19 @@ npm install toc-md-files -g
 ## Markup
 
 
-By default comment bloci load 
+By default comment block load
 
-	<!-- TOCSTART(-1,false,false) -->
+	<!-- TOCSTART(-1) -->
     <!-- TOCEND -->
-	<!-- TOCSTART(1,false,false) -->
+	<!-- TOCSTART(1,content) -->
 	<!-- TOCEND -->
-	<!-- TOCSTART(1,true,true) -->
+	<!-- TOCSTART(no-files) -->
     <!-- TOCEND -->
 
 Params:
- * max depth, if -1 - unlimited 
- * show in file headers
- * show file tree
+ * if first is a number, sets max dept
+ * `content` includes in-file headers
+ * `no-files` skips rendering file tree
 
 ## TODO
 

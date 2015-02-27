@@ -1,6 +1,6 @@
 # Some
 
-<!-- TOCSTART(-1,false,false) -->
+<!-- TOCSTART(-1) -->
 * [COMPLEX_HEADERS.](COMPLEX_HEADERS.md)
 * [INDEX.MD](INDEX.MD)
 * [OTHER.MD](OTHER.MD)

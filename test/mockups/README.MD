@@ -1,6 +1,6 @@
 # tocmd
 
-<!-- TOCSTART(-1,true,false) -->
+<!-- TOCSTART(-1,content) -->
 * [LICENSE](LICENSE)
 * [tocmd](README.MD)
   * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
@@ -39,7 +39,7 @@
 <!-- TOCEND -->
 
 <!-- TOCSTART(-1,content,no-files) -->
-* [tocmd](/Users/lukaszsielski/projects/tocmd/test/mockups/README.MD#user-content-tocmd)
+* [tocmd](./test/mockups/README.MD#user-content-tocmd)
 
 <!-- TOCEND -->
 

@@ -33,22 +33,10 @@ Vestibulum pellentesque mi vitae magna hendrerit convallis. Nulla lorem leo, tri
 
 Nulla congue metus mauris, ut finibus mi consectetur at. In quis malesuada arcu. Nulla bibendum viverra vulputate. Cras ut lorem enim. Phasellus porttitor, eros vitae eleifend blandit, massa nisi luctus risus, eget egestas purus tortor vitae arcu. Duis feugiat pulvinar tortor, at cursus sapien ultrices nec. Nulla et mi nulla. Nunc eu pulvinar velit. Ut egestas enim ornare tincidunt ornare.
 
-<!-- TOCSTART(true,true) -->
-* [LICENSE](LICENSE)
-* [tocmd](README.MD)
-  * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
-    * [Header 2 1.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-2-11)
-      * [Header 3 1.1.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-3-111)
-    * [Header 2 1.2](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-2-12)
-      * [Header 4 1.2.1](doc/myfiles/COMPLEX_HEADERS.md#user-content-header-4-121)
-  * [INDEX.MD](doc/myfiles/INDEX.MD)
-  * [OTHER.MD](doc/myfiles/OTHER.MD)
-  * [README](doc/myfiles/README)
-  * [Some](doc/myfiles/SOME.MD)
-    * [ANY.MD](doc/myfiles/other/ANY.MD)
-    * [INNER.MD](doc/myfiles/other/INNER.MD)
-      * [INDEX.MD](doc/myfiles/other/inner/INDEX.MD)
-    * [readme](doc/myfiles/other/readme)
+<!-- TOCSTART(content,no-files) -->
+* [head](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head)
+  * [head 2](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head-2)
+  * [head 3](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head-3)
 
 <!-- TOCEND -->
 
@@ -63,7 +51,7 @@ Vestibulum vestibulum, nulla vitae molestie aliquam, lorem est congue magna, et 
 ## head 3
 
 
-<!-- TOCSTART(134,true) -->
+<!-- TOCSTART(134,content) -->
 * [LICENSE](LICENSE)
 * [tocmd](README.MD)
   * [Header 1 1](doc/myfiles/COMPLEX_HEADERS.md)
@@ -82,7 +70,7 @@ Vestibulum vestibulum, nulla vitae molestie aliquam, lorem est congue magna, et 
 
 <!-- TOCEND -->
 
-<!-- TOCSTART(-1,true,true) -->
+<!-- TOCSTART(-1,content,no-files) -->
 * [head](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head)
   * [head 2](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head-2)
   * [head 3](/Users/lukaszsielski/projects/tocmd/test/mockups/mockup.tags.emde#user-content-head-3)
