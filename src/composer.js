@@ -21,21 +21,26 @@ function parse(content) {
 
     matches.forEach(function (match) {
         var parts = match.match(regOne);
-        var params = parts[2] ? parts[2].split(',') : '';
+        var args = parts[2] ? parts[2].split(',') : [];
 
-        if(params.indexOf('true') > -1 || params.indexOf('false') > -1 ) {
-            throw new Error('Boolean params are not longer supported');
-        }
-
-        var maxDepth = (!params[0] || isNaN(+params[0])) ? -1 : +params[0];
-        var includeHeaders = params.indexOf('content') > -1;
-        var justHeaders = params.indexOf('no-files') > -1;
+        var params = {};
+        args.forEach(function(arg) {
+            var argPair = arg.split(':'), key, value;
+            if(argPair.length === 1) {
+                key = arg.replace(/^\s+|\s+$/g,'');
+                value = true;
+            } else {
+                key = argPair[0].replace(/^\s+|\s+$/g,'');
+                value = argPair[1].replace(/^\s+|\s+$/g,'');
+            }
+            params[key] = value;
+        });
 
         results.push({
             params: {
-                maxDepth      : maxDepth,
-                includeHeaders: includeHeaders,
-                justHeaders   : justHeaders,
+                maxDepth      : params.depth || -1,
+                includeHeaders: params.content || false,
+                justHeaders   : params['no-files'] || false,
                 original : parts[2] || false
             },
             tag   : match

@@ -1,6 +1,6 @@
 # Some
 
-<!-- TOCSTART(-1) -->
+<!-- TOCSTART -->
 * [COMPLEX_HEADERS.](COMPLEX_HEADERS.md)
 * [INDEX.MD](INDEX.MD)
 * [OTHER.MD](OTHER.MD)
@@ -13,5 +13,5 @@
 
 <!-- TOCEND -->
 
-    <!-- TOCSTART(-1,false,false) -->
+    <!-- TOCSTART(depth:-1,false,false) -->
     <!-- TOCEND -->

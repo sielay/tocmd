@@ -30,7 +30,7 @@ COMPOSER_PARSE    = '/mockups/mockup.composer.parse.js',
 COMPOSER_BUILD_MD = '/mockups/mockup.composer.build.emde';
 
 function exportModule(path, json) {
-    var content = '\'use strict\';module.exports=' + JSON.stringify(json) + ';';
+    var content = '\'use strict\';module.exports=' + JSON.stringify(json, null, 4) + ';';
     fs.writeFileSync(path, content, 'utf8');
     return json;
 }
